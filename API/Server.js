@@ -7,7 +7,7 @@ const router = express.Router();
 const port = 8080;
 
 router.route('/').get((req,res) =>{
-     res.json("Teste Helo Word");
+     res.json("Teste Helo Word2");
 });
 
 app.use('/',router)
