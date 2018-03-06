@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "sequelize": "^4.33.4"
+    "sequelize": "^4.35.2"
   }
 }
