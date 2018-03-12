@@ -1,10 +1,16 @@
-const discoController = require('../controller')
+const discoController = require('../controller/discos');
+const colecaoController = require('../controller/colecaoDiscos');
 
 module.exports = (app) => {
     
-    app.get('/disco', (req, res) => res.status(200).send({
+    app.get('/', (req, res) => res.status(200).send({
         message: 'Welcome to the Todos API!',
       }));
 
-      app.post('/disco/create', todosController.create);
+      app.get('/disco/discos', discoController.listAllDiscos);
+      app.post('/disco/create', discoController.createNewDisco);
+      app.put('/disco/:IdDisco', discoController.changeDiscos);
+      app.delete('/disco/:IdDisco', discoController.deleteDisco);
+
+      app.post('/colecao/create' ,colecaoController.CreateNewColecao);
 }

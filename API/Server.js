@@ -4,8 +4,11 @@
 const express = require('express');
 const app = express();
 const port = 8080;
-
+const bodyParser = require('body-parser')
 const router = require('./routes')(app);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/',router)
 
