@@ -9,6 +9,16 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}/API\\Server.js"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Docker: Attach to Node",
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/api",
+            "protocol": "inspector"
         }
     ]
 }
