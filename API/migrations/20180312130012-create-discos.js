@@ -23,19 +23,29 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      colecaoId: {
+      }
+    }).then(() =>{
+      return queryInterface.addColumn('Discos', 'colecaoId', {
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
+        after: 'IdDisco'
+      });      
+    }).then(() => {
+      return queryInterface.addConstraint('Discos', [ 'colecaoId' ], {
+        type: 'FOREIGN KEY',
+        name: 'FK_colecaoId',
         references: {
-          model: 'ColecaoDisco',
-          key: 'IdColecaoDisco',
-          as: 'colecaoId',
+            table: 'ColecaoDiscos',
+            field: 'IdColecaoDisco'
         },
-      },
+        onDelete: 'cascade'
+    });
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Discos');
+    return queryInterface.removeConstraint('FK_colecaoId', 'Discos').then(function() {
+        return queryInterface.removeColumn('Discos', 'colecaoId');
+    }).then(function() {
+        return queryInterface.dropTable('Discos');
+    });
   }
 };
