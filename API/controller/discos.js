@@ -1,4 +1,4 @@
-const discos = require('../models/discos');
+const discos = require('../models/').Discos;
 const statusSucesso = 201;
 const statusError = 400;
 
@@ -8,7 +8,7 @@ let controller = {
         return discos.create({
             Titulo: req.body.Titulo,
             Artista: req.body.Artista,
-            IdColecaoDisco: req.body.IdColecaoDisco
+            colecaoId: req.body.colecaoId
         })
         .then(disco => res.status(statusSucesso).send(disco))
         .catch(error => res.status(statusError).send(error));
@@ -21,9 +21,25 @@ let controller = {
         .catch(error => res.status(400).send(error));
     },
 
+    listAllDiscosByColecao(req ,res){
+        return  discos.findAll({
+            where: {colecaoId: req.params.colecaoId}
+        })
+        .then(todos => res.status(200).send(todos))
+        .catch(error => res.status(400).send(error));
+    },
+
+    listAllDiscosByNome(req ,res){
+        return  discos.findAll({
+            where: {Titulo: req.params.titulo}
+        })
+        .then(todos => res.status(200).send(todos))
+        .catch(error => res.status(400).send(error));
+    },
+
     changeDiscos(req ,res){
         discos.find({
-            where: {IdDisco: req.params.IdDisco}
+            where: {id: req.params.IdDisco}
         })
         .then(disco => {
             if(disco){
@@ -41,7 +57,7 @@ let controller = {
 
     deleteDisco(req,res){
         discos.destroy({
-            where: {IdDisco: req.params.IdDisco}
+            where: {id: req.params.IdDisco}
         })
         .then(disco => res.status(statusSucesso).send(disco))
         .catch(error => res.status(statusError).send(error));

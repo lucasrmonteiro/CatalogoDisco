@@ -8,6 +8,8 @@ module.exports = (app) => {
       }));
 
       app.get('/disco/discos', discoController.listAllDiscos);
+      app.get('/disco/discos/:titulo', discoController.listAllDiscosByNome);
+      app.get('/disco/colecao/:colecaoId', discoController.listAllDiscosByColecao);
       app.post('/disco/create', discoController.createNewDisco);
       app.put('/disco/:IdDisco', discoController.changeDiscos);
       app.delete('/disco/:IdDisco', discoController.deleteDisco);

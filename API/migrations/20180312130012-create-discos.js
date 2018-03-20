@@ -2,7 +2,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Discos', {
-      IdDisco: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -27,7 +27,8 @@ module.exports = {
     }).then(() =>{
       return queryInterface.addColumn('Discos', 'colecaoId', {
         type: Sequelize.INTEGER,
-        after: 'IdDisco'
+        allowNull: false,
+        after: 'id'
       });      
     }).then(() => {
       return queryInterface.addConstraint('Discos', [ 'colecaoId' ], {
@@ -35,7 +36,7 @@ module.exports = {
         name: 'FK_colecaoId',
         references: {
             table: 'ColecaoDiscos',
-            field: 'IdColecaoDisco'
+            field: 'id'
         },
         onDelete: 'cascade'
     });
