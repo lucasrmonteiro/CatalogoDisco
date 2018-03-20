@@ -1,17 +1,19 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var ColecaoDisco = sequelize.define('ColecaoDisco', {
+    Id: DataTypes.BIGINT,
     NomeColecao: DataTypes.STRING
   }, {});
+
   ColecaoDisco.associate = function(models) {
-    // associations can be defined here
+    ColecaoDisco.hasMany(models.ColecaoDisco, {
+      foreignKey: 'colecaoId',
+      onDelete: 'CASCADE'
+    });
   };
 
-  ColecaoDisco.associate = (models) => {
-    ColecaoDisco.hasMany(models.Discos, {
-      foreignKey: 'colecaoId',
-      as: 'Discos',
-    });
+  ColecaoDisco.associate = function(models) {
+    // associations can be defined here
   };
 
   return ColecaoDisco;

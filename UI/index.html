@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/application.css">
 </head>
 <body>
-  <div class="container" ng-controller="ListaComprasController">
+  <div class="container" ng-controller="discoCntr">
 
     <div class="row">
       <div class="page-header">
@@ -25,16 +25,17 @@
       <table id="lista-compras" class="table table-striped">
         <thead>
           <tr>
-            <!-- <th>Comprado?</th> -->
-            <th>Produto</th>
-            <th>Quantidade</th>
+             <th>Titulo</th>
+            <th>Artista</th>
+            <th>Colecao</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="item in itens | filter:search">
-            <!-- <td><input type="checkbox" ng-model="item.comprado"></td> -->
+            <td><input type="checkbox" ng-model="item.comprado"></td>
             <td><strong>{{ item.Titulo }}</strong></td>
             <td>{{ item.Artista }}</td>
+            <td>{{ item.Colecao }}</td>
             <td>
               <button class="btn btn-warning btn-small" ng-click="editarItem($index)">
                 <i class="icon-pencil icon-white"></i> editar
@@ -49,8 +50,8 @@
     </div>
 
     <form class="row form-inline" name="validarValoresPreenchidos">
-      <input type="text" ng-model="item.produto" placeholder="Produto" required>
-      <input type="number" ng-model="item.quantidade" placeholder="Quantidade" class="input-small" required>
+      <input type="text" ng-model="item.Titulo" placeholder="Titulo" required>
+      <input type="text" ng-model="item.Artista" placeholder="Artista" required>
       <button ng-hide="edit" class="btn btn-success" ng-disabled="validarValoresPreenchidos.$invalid" ng-click="adicionaItem()">
         <i class="icon-plus icon-white"></i> adicionar
       </button>
