@@ -25,16 +25,16 @@
       <table id="lista-compras" class="table table-striped">
         <thead>
           <tr>
-            <th>Comprado?</th>
+            <!-- <th>Comprado?</th> -->
             <th>Produto</th>
             <th>Quantidade</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="item in itens | filter:search" class="comprado-{{ item.comprado }}">
-            <td><input type="checkbox" ng-model="item.comprado"></td>
-            <td><strong>{{ item.produto }}</strong></td>
-            <td>{{ item.quantidade }}</td>
+          <tr ng-repeat="item in itens | filter:search">
+            <!-- <td><input type="checkbox" ng-model="item.comprado"></td> -->
+            <td><strong>{{ item.Titulo }}</strong></td>
+            <td>{{ item.Artista }}</td>
             <td>
               <button class="btn btn-warning btn-small" ng-click="editarItem($index)">
                 <i class="icon-pencil icon-white"></i> editar
@@ -62,6 +62,8 @@
   <script src="lib/jquery.min.js"></script>
   <script src="lib/angular.min.js"></script>
   <script src="lib/toastr.min.js"></script>
-  <script src="app/controllers.js"></script>
+  <script src="app/DiscoModel.js"></script>
+  <script src="app/DiscosServer.js"></script>
+  <script src="app/DiscoControllers.js"></script>
 </body>
 </html>
