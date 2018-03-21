@@ -8,10 +8,5 @@ app.controller("discoCntr", function($scope, DiscosService) {
 
 
 function GetDiscoList(DiscosService){
-    DiscosService.GetAllDiscos()
-        .success(function(data){
-            $scope.discos = data;
-        }).error(function() {  
-            toastr.error('Problemas na requisição');
-        });  
+    DiscosService.GetAllDiscos();
 }    

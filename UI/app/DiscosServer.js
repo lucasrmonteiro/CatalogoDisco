@@ -35,13 +35,13 @@ function doAjax($http ,mehtod ,urlParam ,data){
         data: data,
         dataType: "json"  
     })
-    .sucess (function (data, status, headers, config) {
+    .success (function (data, status, headers, config) {
         // Atribui o retorno ao $scope
         return data;
     })
     .error (function (data, status, headers, config) {
         // Se tiver error
         console.log(status);
-        toastr.error(status);
+        toastr.error("Problemas na Aplicação Entre em Contato o Administrador do Sistema");
     });
 }

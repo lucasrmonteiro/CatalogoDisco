@@ -1,14 +1,20 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="app">
 <head>
   <title>Catálogo de Discos</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/toastr.css">
   <link rel="stylesheet" href="css/application.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="app/DiscoModel.js"></script>
+  <script src="app/DiscosServer.js"></script>
+  <script src="app/DiscoControllers.js"></script>
 </head>
 <body>
-  <div class="container" ng-controller="discoCntr">
+  <div class="container">
 
     <div class="row">
       <div class="page-header">
@@ -21,7 +27,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row"  ng-controller="discoCntr">
       <table id="lista-compras" class="table table-striped">
         <thead>
           <tr>
@@ -31,11 +37,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="item in itens | filter:search">
-            <td><input type="checkbox" ng-model="item.comprado"></td>
-            <td><strong>{{ item.Titulo }}</strong></td>
-            <td>{{ item.Artista }}</td>
-            <td>{{ item.Colecao }}</td>
+          <tr ng-repeat="disco in discos | filter:search">
+            <td><strong>{{ disco.Titulo }}</strong></td>
+            <td>{{ disco.Artista }}</td>
+            <td>{{ disco.ColecaoDisco.NomeColecao }}</td>
             <td>
               <button class="btn btn-warning btn-small" ng-click="editarItem($index)">
                 <i class="icon-pencil icon-white"></i> editar
@@ -60,11 +65,5 @@
       </button>
     </form>
   </div>
-  <script src="lib/jquery.min.js"></script>
-  <script src="lib/angular.min.js"></script>
-  <script src="lib/toastr.min.js"></script>
-  <script src="app/DiscoModel.js"></script>
-  <script src="app/DiscosServer.js"></script>
-  <script src="app/DiscoControllers.js"></script>
 </body>
 </html>
