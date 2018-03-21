@@ -1,4 +1,5 @@
 const discos = require('../models/').Discos;
+const colecao = require('../models/').ColecaoDisco;
 const statusSucesso = 201;
 const statusError = 400;
 
@@ -16,14 +17,15 @@ let controller = {
 
     listAllDiscos(req ,res){
         return discos
-        .all()
+        .all({include: [colecao]})
         .then(todos => res.status(200).send(todos))
         .catch(error => res.status(400).send(error));
     },
 
     listAllDiscosByColecao(req ,res){
         return  discos.findAll({
-            where: {colecaoId: req.params.colecaoId}
+            where: {colecaoId: req.params.colecaoId},
+            include: [colecao]
         })
         .then(todos => res.status(200).send(todos))
         .catch(error => res.status(400).send(error));
@@ -31,7 +33,8 @@ let controller = {
 
     listAllDiscosByNome(req ,res){
         return  discos.findAll({
-            where: {Titulo: req.params.titulo}
+            where: {Titulo: req.params.titulo},
+            include: [colecao]
         })
         .then(todos => res.status(200).send(todos))
         .catch(error => res.status(400).send(error));
