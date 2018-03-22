@@ -3,14 +3,14 @@ version: '2.1'
 services:
   catalogodisco:
     image: catalogodisco
-    build: .
+    build: ./API
     environment:
       NODE_ENV: development
     ports:
       - 8080:8080
       - 9229:9229
     ## set your startup file here
-    command: node --inspect server.js
+    command: node server.js
     links:
       - db
   db:

@@ -10,7 +10,7 @@ let controller = {
             Titulo: req.body.Titulo,
             Artista: req.body.Artista,
             colecaoId: req.body.colecaoId
-        })
+        },{include: [colecao]})
         .then(disco => res.status(statusSucesso).send(disco))
         .catch(error => res.status(statusError).send(error));
     },
@@ -19,6 +19,15 @@ let controller = {
         return discos
         .all({include: [colecao]})
         .then(todos => res.status(200).send(todos))
+        .catch(error => res.status(400).send(error));
+    },
+
+    listAllDiscoById(req ,res){
+        return  discos.find({
+            where: {id: req.params.id},
+            include: [colecao]
+        })
+        .then(disco => res.status(200).send(disco))
         .catch(error => res.status(400).send(error));
     },
 

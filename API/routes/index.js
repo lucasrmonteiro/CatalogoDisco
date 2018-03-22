@@ -15,4 +15,5 @@ module.exports = (app) => {
       app.delete('/disco/:IdDisco', discoController.deleteDisco);
 
       app.post('/colecao/create' ,colecaoController.CreateNewColecao);
+      app.get('/colecao' ,colecaoController.ListAllColecao);
 }

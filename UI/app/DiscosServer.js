@@ -1,7 +1,13 @@
 app.service("DiscosService", function($http) {  
 
     this.GetAllDiscos = function(){
-        return doAjax($http,'GET' ,'/disco/discos' ,'');
+        var ret = doAjax($http,'GET' ,'/disco/discos' ,'');
+        return ret;
+    };
+
+    this.GetAllColecao = function(){
+        var ret = doAjax($http,'GET' ,'/colecao' ,'');
+        return ret;
     };
 
     this.AddNewDisco = function(disco){
@@ -13,7 +19,8 @@ app.service("DiscosService", function($http) {
     };
 
     this.DeleteDisco = function(disco){
-        return doAjax($http,'DELETE' ,'/disco/'+disco.id ,JSON.stringify(disco));
+        var data = {"IdDisco" : disco.id}
+        return doAjax($http,'DELETE' ,'/disco/'+disco.id ,data);
     };
 
     this.GetDiscoByName = function(nome){
@@ -29,19 +36,10 @@ app.service("DiscosService", function($http) {
 
 
 function doAjax($http ,mehtod ,urlParam ,data){
-    $http ({
+  return  $http ({
         method: mehtod,
         url: 'http://localHost:8080' + urlParam,
         data: data,
         dataType: "json"  
-    })
-    .success (function (data, status, headers, config) {
-        // Atribui o retorno ao $scope
-        return data;
-    })
-    .error (function (data, status, headers, config) {
-        // Se tiver error
-        console.log(status);
-        toastr.error("Problemas na Aplicação Entre em Contato o Administrador do Sistema");
     });
 }

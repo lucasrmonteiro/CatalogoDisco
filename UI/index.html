@@ -14,7 +14,7 @@
   <script src="app/DiscoControllers.js"></script>
 </head>
 <body>
-  <div class="container">
+  <div class="container"  ng-controller="discoCntr">
 
     <div class="row">
       <div class="page-header">
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="row"  ng-controller="discoCntr">
+    <div class="row">
       <table id="lista-compras" class="table table-striped">
         <thead>
           <tr>
@@ -45,7 +45,7 @@
               <button class="btn btn-warning btn-small" ng-click="editarItem($index)">
                 <i class="icon-pencil icon-white"></i> editar
               </button>
-              <button class="btn btn-danger btn-small" ng-click="deleteItem($index)">
+              <button class="btn btn-danger btn-small" ng-click="DeleteDisco($index)">
                 <i class="icon-trash icon-white"></i> deletar
               </button>
             </td>
@@ -55,9 +55,12 @@
     </div>
 
     <form class="row form-inline" name="validarValoresPreenchidos">
-      <input type="text" ng-model="item.Titulo" placeholder="Titulo" required>
-      <input type="text" ng-model="item.Artista" placeholder="Artista" required>
-      <button ng-hide="edit" class="btn btn-success" ng-disabled="validarValoresPreenchidos.$invalid" ng-click="adicionaItem()">
+      <input type="text" ng-model="disco.Titulo" placeholder="Titulo" required>
+      <input type="text" ng-model="disco.Artista" placeholder="Artista" required>
+      <select ng-model="disco.colecaoId" placeholder="Coleção" >
+        <option ng-repeat="x in colecoes" value="{{x.id}}">{{x.NomeColecao}}</option>
+        </select>
+      <button ng-hide="edit" class="btn btn-success" ng-disabled="validarValoresPreenchidos.$invalid" ng-click="AddDisco(disco)">
         <i class="icon-plus icon-white"></i> adicionar
       </button>
       <button ng-show="edit" class="btn btn-success" ng-disabled="validarValoresPreenchidos.$invalid" ng-click="applyChanges()">
