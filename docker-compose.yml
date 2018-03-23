@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  api:
+    container_name: APIColecaoDiscos
+    restart: always
+    build: ./API
+    ports:
+      - "8080:8080"
+      - "9229:9229"
+    volumes:
+      - ./API
+      - api-deps:/API/node_modules     
+    links:
+      - db
+  db:
+    container_name: MySQLCoplecaoDiscos
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: lucas
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "3306:3306"      
+volumes:
+  api-deps:

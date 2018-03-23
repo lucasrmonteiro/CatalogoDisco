@@ -1,0 +1,24 @@
+version: '2.1'
+
+services:
+  catalogodisco:
+    image: catalogodisco
+    build: ./API
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
+      - 9229:9229
+    ## set your startup file here
+    command: node server.js
+    links:
+      - db
+  db:
+    container_name: MySQLCoplecaoDiscos
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "3306:3306"       

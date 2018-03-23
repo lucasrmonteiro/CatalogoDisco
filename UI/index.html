@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+  <title>Catálogo de Discos</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/toastr.css">
+  <link rel="stylesheet" href="css/application.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="app/DiscoModel.js"></script>
+  <script src="app/DiscosServer.js"></script>
+  <script src="app/DiscoControllers.js"></script>
+</head>
+<body>
+  <div class="container"  ng-controller="discoCntr">
+
+    <div class="row">
+      <div class="page-header">
+        <div class="span9">
+          <h1>Catálogo de Discos</h1>
+        </div>
+        <div class="span3">
+          <input type="search" ng-model="search" placeholder="Buscar por...">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <table id="lista-compras" class="table table-striped">
+        <thead>
+          <tr>
+             <th>Titulo</th>
+            <th>Artista</th>
+            <th>Colecao</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="disco in discos | filter:search">
+            <td ng-hide="a"><strong>{{ disco.Titulo }}</strong></td>
+            <td ng-show="a"><input type="text" ng-model="disco.Titulo" placeholder="Titulo" required></td>
+            <td ng-hide="a">{{ disco.Artista }}</td>
+            <td ng-show="a"><input type="text" ng-model="disco.Artista" placeholder="Artista" required></td>
+            <td ng-hide="a">{{ disco.ColecaoDisco.NomeColecao }}</td>
+            <td ng-show="a">
+              <button  ng-show="a" class="btn btn-success" ng-click="EditarDisco(disco ,$index);a=!a">
+                <i class="icon-ok icon-white"></i> salvar
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-warning btn-small" ng-click="a=!a">
+                <i class="icon-pencil icon-white"></i> editar
+              </button>
+              <button class="btn btn-danger btn-small" ng-click="DeleteDisco(disco,$index)">
+                <i class="icon-trash icon-white"></i> deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <form class="row form-inline" name="validarValoresPreenchidos">
+      <input type="text" ng-model="disco.Titulo" placeholder="Titulo" required>
+      <input type="text" ng-model="disco.Artista" placeholder="Artista" required>
+      <select ng-model="disco.colecaoId" placeholder="Coleção" >
+        <option ng-repeat="x in colecoes" value="{{x.id}}">{{x.NomeColecao}}</option>
+        </select>
+      <button ng-hide="edit" class="btn btn-success" ng-disabled="validarValoresPreenchidos.$invalid" ng-click="AddDisco(disco)">
+        <i class="icon-plus icon-white"></i> adicionar
+      </button>
+    </form>
+  </div>
+</body>
+</html>
