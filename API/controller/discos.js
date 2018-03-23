@@ -71,7 +71,7 @@ let controller = {
         discos.destroy({
             where: {id: req.params.IdDisco}
         })
-        .then(disco => res.status(statusSucesso).send(disco))
+        .then(disco => res.status(statusSucesso).send({"msg" :"Sucesso"}))
         .catch(error => res.status(statusError).send(error));
     }
 
